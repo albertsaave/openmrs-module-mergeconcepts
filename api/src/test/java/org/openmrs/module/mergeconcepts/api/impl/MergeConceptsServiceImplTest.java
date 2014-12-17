@@ -20,10 +20,13 @@ import org.openmrs.api.*;
 import org.openmrs.PersonAttributeType;
 import org.openmrs.api.PersonService;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.mergeconcepts.MergeConceptType;
 import org.openmrs.module.mergeconcepts.api.MergeConceptsService;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -252,6 +255,18 @@ public class MergeConceptsServiceImplTest extends BaseModuleContextSensitiveTest
 
         Integer updatedDosageFormConceptIdInDrug = drug.getDosageForm().getConceptId();
         assertThat(updatedDosageFormConceptIdInDrug, is(8));
+    }
+
+    @Test
+    public void getAttributes_shouldAddProgramWorkFlowsToAttributesSet() {
+        Concept workflowConceptWithAProgram = getConceptFromConceptId(13);
+        MergeConceptsService service = Context.getService(MergeConceptsService.class);
+        Map<String, Object> map = service.getAttributes(MergeConceptType.NEW.toString(), workflowConceptWithAProgram);
+        List<ProgramWorkflow> programWorkflows = (List<ProgramWorkflow>) (map.get(MergeConceptType.NEW.toString() + "ProgramWorkFlows"));
+        String notNullMessage = "Expect ProgramWorkFlows to exist when searching for conceptId: " + workflowConceptWithAProgram.getId() + " with conceptName: " + workflowConceptWithAProgram.getName();
+
+        assertNotNull(notNullMessage, programWorkflows);
+        assertTrue("Expect ProgramWorkFlows to have at least one member when searching for conceptId: " + workflowConceptWithAProgram.getId() + " with conceptName: " + workflowConceptWithAProgram.getName(), programWorkflows.size() > 0);
     }
 
 

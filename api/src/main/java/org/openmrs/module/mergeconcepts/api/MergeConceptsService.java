@@ -56,6 +56,8 @@ public interface MergeConceptsService extends OpenmrsService {
 
     Map<String, Object> getAttributes(String conceptType, Concept concept);
 
+    public List<ProgramWorkflow> getMatchingProgramWorkFlows(Concept concept);
+
     public int getObsCount(Integer conceptId);
 
 	public List<Integer> getObsIds(Integer conceptId);

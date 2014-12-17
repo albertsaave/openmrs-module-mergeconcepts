@@ -101,6 +101,16 @@
 			</td>
 		</tr>
 		<tr>
+            <th align="left" valign="top">Programs With WorkFlows Associated With This Concept</th>
+            <td>
+            <ul type="none">
+                <c:forEach var="wf" items="${ newProgramWorkFlows }">
+                <li>${ wf.program.name }
+                </c:forEach>
+            </ul>
+            </td>
+        </tr>
+		<tr>
 			<th align="left" valign="top">ConceptAnswers</th>
 			<td>
 			<ul type="none">
@@ -181,6 +191,17 @@
 			</ul>
 			</td>
 		</tr>
+		<tr>
+            <th align="left" valign="top">Programs With WorkFlows Associated With This Concept</th>
+            <td>
+            <ul type="none">
+                <c:forEach var="wf" items="${ oldProgramWorkFlows }">
+                <li>${ wf.program.name }
+                </c:forEach>
+            </ul>
+            </td>
+        </tr>
+
 		<tr>
 			<th align="left" valign="top">ConceptAnswers</th>
 			<td>

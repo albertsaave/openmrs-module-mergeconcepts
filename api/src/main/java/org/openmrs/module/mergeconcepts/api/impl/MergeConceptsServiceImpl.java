@@ -160,6 +160,7 @@ public class MergeConceptsServiceImpl extends BaseOpenmrsService implements Merg
         attributes.put(conceptType + "Forms", getMatchingForms(concept));
         attributes.put(conceptType + "Orders", getMatchingOrders(concept));
         attributes.put(conceptType + "Programs", getMatchingPrograms(concept));
+        attributes.put(conceptType + "ProgramWorkFlows", getMatchingProgramWorkFlows(concept));
         attributes.put(conceptType + "PersonAttributeTypes", getMatchingPersonAttributeTypes(concept));
 
         List<String> drugNames = new ArrayList<String>();
@@ -223,6 +224,11 @@ public class MergeConceptsServiceImpl extends BaseOpenmrsService implements Merg
     @Override
     public List<Program> getMatchingPrograms(Concept concept) {
         return dao.getProgramsByConcept(concept);
+    }
+
+    @Override
+    public List<ProgramWorkflow> getMatchingProgramWorkFlows(Concept concept) {
+        return dao.getProgramWorkflowsByConcept(concept);
     }
 
     @Override
